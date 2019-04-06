@@ -37,26 +37,47 @@ class TopNav extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">
-                  <i className="fas fa-home" />
-                  Home
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
-                  GitHub
-                </NavLink>
-              </NavItem>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
+                <DropdownToggle nav>
+                  <i class="fa fa-tasks fa-fw" />
+                  <span class="badge badge-danger badge-counter">3+</span>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Option 1</DropdownItem>
-                  <DropdownItem>Option 2</DropdownItem>
+                  <DropdownItem>Urgent Tasks</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>Reset</DropdownItem>
+                  <DropdownItem>Items out of stock</DropdownItem>
+                  <DropdownItem>Unallocated Disbursements</DropdownItem>
+                  <DropdownItem>Overdue Receivables</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav>
+                  <i class="fa fa-list-alt fa-fw" />
+                  <span class="badge badge-danger badge-counter">3+</span>
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>Add Contact</DropdownItem>
+                  <DropdownItem>Add Product</DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>Add Service</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav>
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    Valerie Luna
+                  </span>
+                  <img
+                    class="img-profile rounded-circle"
+                    src="https://source.unsplash.com/QAB-WJcbgJk/32x32"
+                  />
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>Profile</DropdownItem>
+                  <DropdownItem>Settings </DropdownItem>
+                  <DropdownItem>Activity Log </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>Logout</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
