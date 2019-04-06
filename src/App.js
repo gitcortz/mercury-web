@@ -10,11 +10,13 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
+        <div className="App page-wrapper mercury-theme">
           <SideNav />
-          <TopNav />
-          <Route exact path="/" component={Dashboard} />
-          <Footer />
+          <div class="page-content">
+            <TopNav />
+            <Route exact path="/" component={Dashboard} />
+            <Footer />
+          </div>
         </div>
       </Router>
     );
