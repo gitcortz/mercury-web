@@ -7,6 +7,8 @@ import Dashboard from "./components/dashboard/Dashboard";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Contacts from "./components/company/Contacts";
 import SalesOrder from "./components/sales/SalesOrder";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 class App extends Component {
   render() {
@@ -16,9 +18,11 @@ class App extends Component {
           <SideNav />
           <div class="page-content">
             <TopNav />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/" component={Dashboard} />
-            <Route exact path="/contacts" component={Contacts} />
-            <Route exact path="/salesorder" component={SalesOrder} />
+            <Route exact path="/company/contacts" component={Contacts} />
+            <Route exact path="/sales/order" component={SalesOrder} />
             <Footer />
           </div>
         </div>
