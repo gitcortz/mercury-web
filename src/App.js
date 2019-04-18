@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -13,6 +13,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
 import "./App.css";
+import PrivateRoute from "./components/common/PrivateRoute";
 
 class App extends Component {
   render() {
@@ -21,11 +22,13 @@ class App extends Component {
         <Router>
           <div className="App page-wrapper mercury-theme">
             <SideNav />
-            <div class="page-content">
+            <div className="page-content">
               <TopNav />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Login} />
               <Route exact path="/register" component={Register} />
-              <Route exact path="/" component={Dashboard} />
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
               <Route exact path="/company/contacts" component={Contacts} />
               <Route exact path="/sales/order" component={SalesOrder} />
               <Footer />
