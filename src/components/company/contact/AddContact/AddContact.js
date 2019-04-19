@@ -106,13 +106,13 @@ class AddContact extends Component {
                     onChange={this.onChange}
                   />
 
-                  <div className="text-left">
+                  <div className="text-left mt-3">
                     <button
                       type="button"
                       onClick={this.addContactNumber}
                       className="btn btn-success btn-sm"
                     >
-                      Add phone
+                      <i class="fa fa-plus" /> Add phone
                     </button>
                   </div>
                 </div>

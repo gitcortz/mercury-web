@@ -1,7 +1,7 @@
 import React from "react";
 import TextFieldGroup from "../../../common/TextFieldGroup";
 import SelectListGroup from "../../../common/SelectListGroup";
-import DropdownInputGroup from "../../../common/DropdownInputGroup";
+import DropdownTextFieldGroup from "../../../common/DropdownTextFieldGroup";
 
 const ContactNumberInputGroup = props => {
   //options to number label
@@ -16,25 +16,18 @@ const ContactNumberInputGroup = props => {
       contactPhoneId = `contactPhoneId-${idx}`;
 
     return (
-      <div key={idx}>
-        <DropdownInputGroup />
-        <label htmlFor={contactLabelId}>{`Contact #${idx + 1}`}</label>
-        <SelectListGroup
-          name={contactLabelId}
-          fieldName="label"
-          value={props.numbers[idx].label}
+      <div key={idx} className="input-group">
+        <DropdownTextFieldGroup
+          names={{ select: contactLabelId, textinput: contactPhoneId }}
+          fieldNames={{ select: "label", textinput: "phone_number" }}
+          values={{
+            select: props.numbers[idx].label,
+            textinput: props.numbers[idx].value.phone_number
+          }}
           idx={idx}
           options={optionNumberLabels}
           onChange={props.onChange}
-        />
-        <label htmlFor={contactPhoneId}>Phone :</label>
-        <TextFieldGroup
-          placeholder="Phone Number"
-          name={contactPhoneId}
-          fieldName="phone_number"
-          idx={idx}
-          value={props.numbers[idx].value.phone_number}
-          onChange={props.onChange}
+          placeholder="+1 (999) 999 9999"
         />
       </div>
     );
