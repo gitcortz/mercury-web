@@ -11,6 +11,7 @@ const DropdownTextFieldGroup = ({
   info,
   idx,
   onChange,
+  onRemove,
   options
 }) => {
   const selectOptions = options.map(option => (
@@ -18,17 +19,21 @@ const DropdownTextFieldGroup = ({
       {option.label}
     </option>
   ));
-  const divStyle = {
+  const selectStyle = {
     width: "130px",
     borderTopLeftRadius: "5px",
     borderBottomLeftRadius: "5px",
     borderColor: "#ced4da"
   };
+  const rightButtonStyle = {
+    borderTopLeftRadius: "0px",
+    borderBottomLeftRadius: "0px"
+  };
 
   return (
-    <div className="input-group">
+    <div className="input-group mb-1">
       <select
-        style={divStyle}
+        style={selectStyle}
         className=""
         fieldname={fieldNames.select}
         name={names.select}
@@ -49,6 +54,16 @@ const DropdownTextFieldGroup = ({
         data-id={idx}
         onChange={onChange}
       />
+      <span class="input-group-btn">
+        <button
+          type="button"
+          style={rightButtonStyle}
+          class="btn btn-danger btn-lg"
+          onClick={onRemove}
+        >
+          <i class="fa fa-minus" />
+        </button>
+      </span>
       {info && <small className="form-text text-muted">{info}</small>}
       {error && <div className="invalid-feedback">{error}</div>}
     </div>
@@ -64,6 +79,7 @@ DropdownTextFieldGroup.propTypes = {
   info: PropTypes.string,
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired
 };
 

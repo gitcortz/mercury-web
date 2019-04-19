@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, Table } from "reactstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { getContacts } from "../../../../actions/contactActions";
 import Spinner from "../../../common/Spinner/Spinner";
 
@@ -23,13 +24,22 @@ class Contacts extends Component {
       if (Object.keys(contacts).length > 0) {
         dashboardContent = <h4>display contact</h4>;
 
-        contactsContent = contacts.map((val, idx) => (
-          <tr id={contacts[idx].id}>
-            <th scope="row">{idx + 1}</th>
-            <td>{contacts[idx].profile.name}</td>
-
-            <td>@fat</td>
-          </tr>
+        contactsContent = contacts.map((contact, idx) => (
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{contact.profile.name}</h5>
+              <ul class="list-unstyled">
+                <li>
+                  {contact.profile.numbers.map((item, key) => (
+                    <li key={item.label + "_" + key}>
+                      {item.label} :{" "}
+                      <a href="tel:">{item.value.phone_number}</a>
+                    </li>
+                  ))}
+                </li>
+              </ul>
+            </div>
+          </div>
         ));
       } else {
         dashboardContent = <h4>no contact</h4>;
@@ -39,42 +49,15 @@ class Contacts extends Component {
     return (
       <div>
         <h1>Contacts</h1>
+        <div className="text-right mb-3 mr-3">
+          <Link to="/contact/create" className="btn btn-sm btn-info">
+            <i class="fa fa-plus" /> Add Contact
+          </Link>
+        </div>
+
         <Container>
           <Row>
-            <Col>
-              {dashboardContent}
-              <Table striped hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {contactsContent}
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Col>
+            <Col>{contactsContent}</Col>
           </Row>
         </Container>
       </div>

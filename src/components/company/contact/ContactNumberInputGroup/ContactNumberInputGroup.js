@@ -11,6 +11,10 @@ const ContactNumberInputGroup = props => {
     { label: "Mobile", value: "Mobile" }
   ];
 
+  const removeContactNumber = idx => () => {
+    props.onRemove(idx);
+  };
+
   return props.numbers.map((val, idx) => {
     let contactLabelId = `contactLabel-${idx}`,
       contactPhoneId = `contactPhoneId-${idx}`;
@@ -27,6 +31,8 @@ const ContactNumberInputGroup = props => {
           idx={idx}
           options={optionNumberLabels}
           onChange={props.onChange}
+          onRemove={removeContactNumber(idx)}
+          value={idx}
           placeholder="+1 (999) 999 9999"
         />
       </div>

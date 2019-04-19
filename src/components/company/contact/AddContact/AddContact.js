@@ -3,10 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../../../common/TextFieldGroup";
-import SelectListGroup from "../../../common/SelectListGroup";
 import { createContact } from "../../../../actions/contactActions";
 import ContactNumberInputGroup from "../ContactNumberInputGroup/ContactNumberInputGroup";
-import InputGroup from "reactstrap/lib/InputGroup";
 
 class AddContact extends Component {
   constructor(props) {
@@ -20,6 +18,7 @@ class AddContact extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.addContactNumber = this.addContactNumber.bind(this);
+    this.removeContactNumber = this.removeContactNumber.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,13 +28,37 @@ class AddContact extends Component {
   }
 
   addContactNumber(e) {
-    console.log("add contact number");
-    this.setState(prevState => ({
+    /*this.setState(prevState => ({
       numbers: [
         ...prevState.numbers,
         { label: "Mobile", value: { phone_number: "" } }
       ]
-    }));
+    }));*/
+    console.log(this.state.numbers);
+    this.setState({
+      numbers: this.state.numbers.concat([
+        { label: "Mobile", value: { phone_number: "" } }
+      ])
+    });
+  }
+
+  removeContactNumber(idx) {
+    console.log("remove contact number " + idx);
+    console.log(this.state.numbers);
+
+    console.log(
+      this.state.numbers.map(
+        (s, sidx) =>
+          parseInt(idx) +
+          " " +
+          parseInt(sidx) +
+          (parseInt(idx) !== parseInt(sidx))
+      )
+    );
+
+    this.setState({
+      numbers: this.state.numbers.filter((s, sidx) => Number(idx) !== sidx)
+    });
   }
 
   onSubmit(e) {
@@ -104,6 +127,7 @@ class AddContact extends Component {
                   <ContactNumberInputGroup
                     numbers={numbers}
                     onChange={this.onChange}
+                    onRemove={this.removeContactNumber}
                   />
 
                   <div className="text-left mt-3">
