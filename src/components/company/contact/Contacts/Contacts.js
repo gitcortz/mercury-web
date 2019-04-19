@@ -27,6 +27,12 @@ class Contacts extends Component {
         contactsContent = contacts.map((contact, idx) => (
           <div class="card">
             <div class="card-body">
+              <div class="text-right">
+                <Link to={`/contact/update/${contact.id}`}>
+                  <i class="fa fa-edit" />
+                </Link>
+              </div>
+
               <h5 class="card-title">{contact.profile.name}</h5>
               <ul class="list-unstyled">
                 <li>

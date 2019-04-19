@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
     case CONTACT_GET:
       return {
         ...state,
-        contact: action.payload,
+        contact: action.payload.data,
         loading: false
       };
     case CONTACTS_GET:

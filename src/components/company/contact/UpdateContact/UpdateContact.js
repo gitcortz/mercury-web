@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { getContact, updateContact } from "../../../../actions/contactActions";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../../../common/TextFieldGroup";
-import { createContact } from "../../../../actions/contactActions";
 import ContactNumberInputGroup from "../ContactNumberInputGroup/ContactNumberInputGroup";
 
-class AddContact extends Component {
-  constructor(props) {
-    super(props);
+class UpdateContact extends Component {
+  constructor() {
+    super();
     this.state = {
+      id: "",
       name: "",
       numbers: [{ label: "Mobile", value: { phone_number: "" } }],
       errors: {}
@@ -21,7 +22,20 @@ class AddContact extends Component {
     this.removeContactNumber = this.removeContactNumber.bind(this);
   }
 
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.getContact(id, this.props.history);
+  }
+
   componentWillReceiveProps(nextProps) {
+    const { id, profile } = nextProps.contact;
+
+    this.setState({
+      id: id,
+      name: profile.name,
+      numbers: profile.numbers,
+      errors: {}
+    });
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -48,8 +62,8 @@ class AddContact extends Component {
       numbers: this.state.numbers
     };
 
-    console.log("submit " + JSON.stringify(contactData));
-    this.props.createContact(contactData, this.props.history);
+    console.log("submit " + this.state.id);
+    this.props.updateContact(this.state.id, contactData, this.props.history);
   }
 
   onChange(e) {
@@ -89,11 +103,12 @@ class AddContact extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create Contact</h1>
+              <h1 className="display-4 text-center">Update Contact</h1>
 
-              <p className="lead text-center">Add contact</p>
+              <p className="lead text-center">update contact</p>
               <small className="d-block pb-3">* = required field(s)</small>
               <form onSubmit={this.onSubmit} onChange={this.onChange}>
+                {this.state.id}
                 <TextFieldGroup
                   placeholder="* Name"
                   name="name"
@@ -135,18 +150,19 @@ class AddContact extends Component {
   }
 }
 
-AddContact.propTypes = {
+UpdateContact.propTypes = {
   contact: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  createContact: PropTypes.func.isRequired
+  getContact: PropTypes.func.isRequired,
+  updateContact: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  contact: state.contact,
+  contact: state.contact.contact,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { createContact }
-)(withRouter(AddContact));
+  { getContact, updateContact }
+)(withRouter(UpdateContact));

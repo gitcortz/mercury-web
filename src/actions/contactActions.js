@@ -1,63 +1,66 @@
 import axios from "axios";
+import api from "./api";
 import {
   CONTACT_GET,
   CONTACTS_GET,
   CONTACT_LOADING,
   ERRORS_GET
 } from "./types";
-import api from "./api";
 
-//Get contact
-export const getContact = () => dispatch => {
-  console.log("get contact");
-  dispatch(setContactLoading());
-  api
-    .get("/contact/03451f73-b259-4824-8c71-78abd635a8e8")
-    .then(res =>
-      dispatch({
-        type: CONTACT_GET,
-        payload: res.data
-      })
-    )
-    .catch(err => {
-      dispatch({
-        type: ERRORS_GET,
-        payload: {}
-      });
+//Create contact
+export const createContact = (contactData, history) => async dispatch => {
+  try {
+    const res = await api.post("/contact", contactData);
+    history.push("/contact");
+    dispatch({
+      type: ERRORS_GET,
+      payload: {}
     });
+  } catch (err) {
+    dispatch({
+      type: ERRORS_GET,
+      payload: err.reponse.data
+    });
+  }
 };
 
 //Get contacts
-export const getContacts = () => dispatch => {
-  console.log("get contacts");
+export const getContacts = () => async dispatch => {
   dispatch(setContactLoading());
-  api
-    .get("/contact")
-    .then(res =>
-      dispatch({
-        type: CONTACTS_GET,
-        payload: res.data
-      })
-    )
-    .catch(err => {
-      dispatch({
-        type: ERRORS_GET,
-        payload: {}
-      });
-    });
+  const res = await api.get("/contact");
+  dispatch({
+    type: CONTACTS_GET,
+    payload: res.data
+  });
 };
-//Create contact
-export const createContact = (contactData, history) => dispatch => {
-  console.log("createContact - " + contactData);
-  api
-    .post("/contact", contactData)
-    .then(res => history.push("/contact"))
-    .catch(err =>
-      dispatch({
-        type: ERRORS_GET,
-        payload: err.reponse.data
-      })
-    );
+
+//Get contact
+export const getContact = (id, history) => async dispatch => {
+  //dispatch(setContactLoading());
+  console.log("get contact " + id);
+  const res = await api.get(`/contact/${id}`);
+  dispatch({
+    type: CONTACT_GET,
+    payload: res.data
+  });
+};
+
+//Update contact
+export const updateContact = (id, contactData, history) => async dispatch => {
+  console.log("updateContact - " + id);
+  try {
+    await api.put(`/contact/${id}`, contactData);
+    history.push("/contact");
+    dispatch({
+      type: ERRORS_GET,
+      payload: {}
+    });
+  } catch (err) {
+    dispatch({
+      type: ERRORS_GET,
+      payload: err.response.data
+    });
+  }
 };
 
 //Contact loading
