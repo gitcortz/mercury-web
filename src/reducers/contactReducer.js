@@ -1,4 +1,9 @@
-import { CONTACT_GET, CONTACTS_GET, CONTACT_LOADING } from "../actions/types";
+import {
+  CONTACT_GET,
+  CONTACTS_GET,
+  CONTACT_DELETE,
+  CONTACT_LOADING
+} from "../actions/types";
 
 const initialState = {
   contact: null,
@@ -20,9 +25,18 @@ export default function(state = initialState, action) {
         loading: false
       };
     case CONTACTS_GET:
+      console.log(action.payload.data);
       return {
         ...state,
         contacts: action.payload.data,
+        loading: false
+      };
+    case CONTACT_DELETE:
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          contact => contact.id !== action.payload
+        ),
         loading: false
       };
     default:

@@ -4,7 +4,8 @@ import {
   CONTACT_GET,
   CONTACTS_GET,
   CONTACT_LOADING,
-  ERRORS_GET
+  ERRORS_GET,
+  CONTACT_DELETE
 } from "./types";
 
 //Create contact
@@ -59,6 +60,20 @@ export const updateContact = (id, contactData, history) => async dispatch => {
     dispatch({
       type: ERRORS_GET,
       payload: err.response.data
+    });
+  }
+};
+
+export const deleteContact = id => async dispatch => {
+  if (
+    window.confirm(
+      `You are deleting contact ${id}, this action cannot be undone`
+    )
+  ) {
+    await api.delete(`/contact/${id}`);
+    dispatch({
+      type: CONTACT_DELETE,
+      payload: id
     });
   }
 };

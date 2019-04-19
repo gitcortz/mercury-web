@@ -3,8 +3,9 @@ import { Container, Row, Col, Table } from "reactstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getContacts } from "../../../../actions/contactActions";
+import { getContacts, deleteContact } from "../../../../actions/contactActions";
 import Spinner from "../../../common/Spinner/Spinner";
+import ContactItem from "../ContactItem/ContactItem";
 
 class Contacts extends Component {
   componentDidMount() {
@@ -15,40 +16,16 @@ class Contacts extends Component {
     console.log(this.props.contact);
     const { contacts, loading } = this.props.contact;
 
-    let dashboardContent;
     let contactsContent;
     if (contacts === null || loading) {
-      dashboardContent = <Spinner />;
+      contactsContent = <Spinner />;
     } else {
-      //Check if has data
       if (Object.keys(contacts).length > 0) {
-        dashboardContent = <h4>display contact</h4>;
-
         contactsContent = contacts.map((contact, idx) => (
-          <div class="card">
-            <div class="card-body">
-              <div class="text-right">
-                <Link to={`/contact/update/${contact.id}`}>
-                  <i class="fa fa-edit" />
-                </Link>
-              </div>
-
-              <h5 class="card-title">{contact.profile.name}</h5>
-              <ul class="list-unstyled">
-                <li>
-                  {contact.profile.numbers.map((item, key) => (
-                    <li key={item.label + "_" + key}>
-                      {item.label} :{" "}
-                      <a href="tel:">{item.value.phone_number}</a>
-                    </li>
-                  ))}
-                </li>
-              </ul>
-            </div>
-          </div>
+          <ContactItem key={contact.id} contact={contact} />
         ));
       } else {
-        dashboardContent = <h4>no contact</h4>;
+        contactsContent = <h4>no contact</h4>;
       }
     }
 
@@ -78,11 +55,12 @@ const mapStateToProps = state => ({
 
 Contacts.propTypes = {
   getContacts: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   contact: PropTypes.object.isRequired
 };
 
 export default connect(
   mapStateToProps,
-  { getContacts }
+  { getContacts, deleteContact }
 )(Contacts);
