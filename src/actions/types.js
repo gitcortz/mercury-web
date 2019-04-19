@@ -1,0 +1,5 @@
+export const ERRORS_GET = "ERRORS_GET";
+export const CONTACT_GET = "CONTACT_GET";
+export const CONTACT_LOADING = "CONTACT_LOADING";
+export const CONTACT_NOT_FOUND = "CONTACT_NOT_FOUND";
+export const CONTACTS_GET = "CONTACTS_GET";

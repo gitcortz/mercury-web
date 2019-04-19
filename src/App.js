@@ -7,13 +7,14 @@ import TopNav from "./components/layout/TopNav";
 import Footer from "./components/layout/Footer";
 import SideNav from "./components/layout/SideNav";
 import Dashboard from "./components/dashboard/Dashboard";
-import Contacts from "./components/company/Contacts";
+import Contacts from "./components/company/contact/Contacts";
 import SalesOrder from "./components/sales/SalesOrder";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
 import "./App.css";
 import PrivateRoute from "./components/common/PrivateRoute";
+import AddContact from "./components/company/contact/AddContact";
 
 class App extends Component {
   render() {
@@ -24,12 +25,13 @@ class App extends Component {
             <SideNav />
             <div className="page-content">
               <TopNav />
+              <Route exact path="/contact/create" component={AddContact} />
               <Route exact path="/" component={Login} />
               <Route exact path="/register" component={Register} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
-              <Route exact path="/company/contacts" component={Contacts} />
+              <Route exact path="/contact" component={Contacts} />
               <Route exact path="/sales/order" component={SalesOrder} />
               <Footer />
             </div>
