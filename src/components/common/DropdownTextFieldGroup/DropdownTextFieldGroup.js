@@ -54,14 +54,14 @@ const DropdownTextFieldGroup = ({
         data-id={idx}
         onChange={onChange}
       />
-      <span class="input-group-btn">
+      <span className="input-group-btn">
         <button
           type="button"
           style={rightButtonStyle}
-          class="btn btn-danger btn-lg"
+          className="btn btn-danger btn-lg"
           onClick={onRemove}
         >
-          <i class="fa fa-minus" />
+          <i className="fa fa-minus" />
         </button>
       </span>
       {info && <small className="form-text text-muted">{info}</small>}
@@ -75,7 +75,7 @@ DropdownTextFieldGroup.propTypes = {
   values: PropTypes.object.isRequired,
   fieldNames: PropTypes.object.isRequired,
   placeholder: PropTypes.string,
-  idx: PropTypes.string,
+  idx: PropTypes.number,
   info: PropTypes.string,
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,

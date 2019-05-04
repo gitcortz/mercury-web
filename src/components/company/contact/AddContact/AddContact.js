@@ -93,7 +93,11 @@ class AddContact extends Component {
 
               <p className="lead text-center">Add contact</p>
               <small className="d-block pb-3">* = required field(s)</small>
-              <form onSubmit={this.onSubmit} onChange={this.onChange}>
+              <form
+                id="myForm"
+                onSubmit={this.onSubmit}
+                onChange={this.onChange}
+              >
                 <TextFieldGroup
                   placeholder="* Name"
                   name="name"
@@ -116,7 +120,7 @@ class AddContact extends Component {
                       onClick={this.addContactNumber}
                       className="btn btn-success btn-sm"
                     >
-                      <i class="fa fa-plus" /> Add phone
+                      <i className="fa fa-plus" /> Add phone
                     </button>
                   </div>
                 </div>
@@ -148,5 +152,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createContact }
+  { createContact },
+  null,
+  { forwardRef: true }
 )(withRouter(AddContact));
