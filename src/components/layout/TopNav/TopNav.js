@@ -5,21 +5,24 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Button
 } from "reactstrap";
+import ModalWindow from "../../common/ModalWindow/ModalWindow";
+import AddContact from "../../company/contact/AddContact";
 
 class TopNav extends Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      modal: false
     };
   }
 
@@ -29,7 +32,19 @@ class TopNav extends Component {
     });
   }
 
+  toggleModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+
   render() {
+    const closeBtn = (
+      <button className="close" onClick={this.toggleModal}>
+        &times;
+      </button>
+    );
+
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -39,8 +54,8 @@ class TopNav extends Component {
             <Nav className="ml-auto" navbar>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>
-                  <i class="fa fa-tasks fa-fw" />
-                  <span class="badge badge-danger badge-counter">3+</span>
+                  <i className="fa fa-tasks fa-fw" />
+                  <span className="badge badge-danger badge-counter">3+</span>
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>Urgent Tasks</DropdownItem>
@@ -52,11 +67,13 @@ class TopNav extends Component {
               </UncontrolledDropdown>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>
-                  <i class="fa fa-list-alt fa-fw" />
-                  <span class="badge badge-danger badge-counter">3+</span>
+                  <i className="fa fa-list-alt fa-fw" />
+                  <span className="badge badge-danger badge-counter">3+</span>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Add Contact</DropdownItem>
+                  <DropdownItem onClick={this.toggleModal}>
+                    Add Contact
+                  </DropdownItem>
                   <DropdownItem>Add Product</DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>Add Service</DropdownItem>
@@ -64,11 +81,11 @@ class TopNav extends Component {
               </UncontrolledDropdown>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                  <span className="mr-2 d-none d-lg-inline text-gray-600 small">
                     Valerie Luna
                   </span>
                   <img
-                    class="img-profile rounded-circle"
+                    className="img-profile rounded-circle"
                     src="https://source.unsplash.com/QAB-WJcbgJk/32x32"
                   />
                 </DropdownToggle>
@@ -83,6 +100,11 @@ class TopNav extends Component {
             </Nav>
           </Collapse>
         </Navbar>
+        <ModalWindow
+          isOpen={this.state.modal}
+          onToggle={this.toggleModal}
+          body={<AddContact />}
+        />
       </div>
     );
   }
