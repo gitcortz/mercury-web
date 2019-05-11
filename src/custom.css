@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500|Roboto:400,500");
+
+body {
+  color: #626262;
+  font-size: 13px;
+  background: #fff;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 10px 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-weight: 300;
+  color: #2c2c2c;
+}
+.container {
+  max-width: 100%;
+}
+
+@media (max-width: 1400px) {
+  h3 {
+    font-size: 24px;
+    line-height: 35.88px;
+  }
+}
+
+.navbar-nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.text-black {
+  color: #2c2c2c !important;
+}
+
+.m-l-10 {
+  margin-left: 10px;
+}
+
+.label {
+  padding: 3px 9px;
+  font-size: 11px;
+  line-height: 1;
+  text-shadow: none;
+  background-color: #e6e6e6;
+  font-weight: 600;
+  color: #626262;
+  border-radius: 0.25em;
+}
+.label-success {
+  background-color: #10cfbd;
+  color: #fff;
+}
+.label-warning {
+  background-color: #f8d053;
+  color: #fff;
+}
+.label-important,
+.label-danger {
+  background-color: #f55753;
+  color: #fff;
+}
+
+.breadcrumb {
+  font-family: "Montserrat";
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  padding: 15px 0;
+  margin: 0;
+  border: none;
+  text-transform: uppercase;
+}
+.breadcrumb-item {
+  float: left;
+  padding-left: 0px;
+}
+.breadcrumb-item.active {
+  font-weight: 500;
+  color: #0090d9;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 10.5px !important;
+  letter-spacing: 0.06em;
+}
